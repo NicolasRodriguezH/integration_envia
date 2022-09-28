@@ -7,5 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guide extends Model
 {
+    protected $guarded = ['IdCLienteCredito', 'timestamps'];
+
+    public function liquidation() {
+        return $this->hasOne(Liquidation::class);
+    }
+
+    /* public function receiver() {
+        return $this->hasOne(Receiver::class);
+    } */
+
+    /* public function rapiRadicado() {
+        return $this->hasOne(RapiRadicado::class);
+    } */
+
     use HasFactory;
 }

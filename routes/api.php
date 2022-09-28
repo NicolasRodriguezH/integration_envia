@@ -12,4 +12,5 @@ use function Ramsey\Uuid\v1;
 
 // V1
 Route::apiResource('v1/guide_envia', GuideV1::class)
-                ->only(['post', 'index', 'show']);
+    ->only(['store', 'index', 'show'])
+    ->middleware('auth:sanctum');

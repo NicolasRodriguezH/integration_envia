@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Guide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 /* Recurso individual */
 use App\Http\Controllers\Resources\V1\GuideResource;
@@ -20,7 +21,10 @@ class GuideController extends Controller
      */
     public function index()
     {
-        //
+        $api_guide = env("API_GUIDE");
+        $guide = Http::get($api_guide);
+        $guideAsArray = $guide->json();
+        return $guideAsArray;
     }
 
     /**
@@ -31,7 +35,27 @@ class GuideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $guide = new Guide($request->all());
+        $guide->save();
+        $liquidation = $guide->liquidation();
+        
+        /* return (Http::withHeaders([
+            'x-app-signature' => '',
+            'x-app-security_token' => ''
+        ])->post(env('API_LIQUIDATION'))->response()->json([
+            'res' => 'Guia registrada',
+            'data' => "Aqui iria data"
+        ], 200)); */
+
+        
+        $liquidation = Http::withHeaders([
+            'x-app-signature' => '',
+            'x-app-security_token' => ''
+        ])->post(env('API_LIQUIDATION'))->json();
+        return response()->json([
+            'res' => 'Guia registrada',
+            'data' => $liquidation
+        ], 200);
     }
 
     /**
@@ -42,7 +66,10 @@ class GuideController extends Controller
      */
     public function show(Guide $guide)
     {
-        //
+        $api_guide = env("API_GUIDE");
+        $guide = Http::get($api_guide);
+        $guideAsArray = $guide->json();
+        return $guideAsArray;
     }
 
     /**
