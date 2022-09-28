@@ -71,27 +71,4 @@ class GuideController extends Controller
         $guideAsArray = $guide->json();
         return $guideAsArray;
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Guide  $guide
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Guide $guide)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Guide  $guide
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Guide $guide)
-    {
-        //
-    }
 }
