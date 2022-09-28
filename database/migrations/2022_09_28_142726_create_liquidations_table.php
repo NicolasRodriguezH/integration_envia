@@ -14,7 +14,7 @@ class CreateLiquidationsTable extends Migration
     public function up()
     {
         Schema::create('liquidations', function (Blueprint $table) {
-            $table->id('IdPreenvio');
+            $table->id();
             $table->longText('numeroPreenvio')->nullable();
             $table->date('fechaVencimineto')->nullable();
             $table->date('fechaCreacion')->nullable();
