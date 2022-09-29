@@ -21,6 +21,12 @@ class CreateLiquidationsTable extends Migration
             $table->decimal('valorFlete')->nullable();
             $table->decimal('valorSobreFlete')->nullable();
             $table->decimal('valorServicioContrapago')->nullable();
+            $table->unsignedBigInteger('guide_id');
+            $table->foreign('guide_id')
+                    ->references('IdClienteCredito')
+                    ->on('guides')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

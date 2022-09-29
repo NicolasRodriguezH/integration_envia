@@ -10,9 +10,9 @@ class Receiver extends Model
 
     protected $guarded = ['id', 'timestamps'];
 
-    /* public function guide() {
+    public function guide() {
         return $this->hasOne(Guide::class);
-    } */
+    }
 
     use HasFactory;
 }

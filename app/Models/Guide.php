@@ -13,13 +13,13 @@ class Guide extends Model
         return $this->hasOne(Liquidation::class);
     }
 
-    /* public function receiver() {
+    public function receiver() {
         return $this->hasOne(Receiver::class);
-    } */
+    }
 
-    /* public function rapiRadicado() {
+    public function rapiRadicado() {
         return $this->hasOne(RapiRadicado::class);
-    } */
+    }
 
     use HasFactory;
 }

@@ -22,8 +22,8 @@ class GuideController extends Controller
      */
     public function index()
     {
-        //$guide = Guide::find()->liquidation;
-        //return new V1GuideResource();
+        /* $guide = Guide::latest()->liquidation;
+        return new GuideResource($guide); */
     }
 
     /**
@@ -36,24 +36,14 @@ class GuideController extends Controller
     {
         $guide = new Guide($request->all());
         $guide->save();
-        
-        /* return (Http::withHeaders([
-            'x-app-signature' => '',
-            'x-app-security_token' => ''
-        ])->post(env('API_LIQUIDATION'))->response()->json([
-            'res' => 'Guia registrada',
-            'data' => "Aqui iria data"
-        ], 200)); */
 
-        /* withHeaders([
-            'x-app-signature' => '',
-            'x-app-security_token' => ''
-        ])-> */
+        $request->header('x-app-security_token');
+
         $liquidation = Http::post(env('API_LIQUIDATION'))->json();
 
         return response()->json([
-            'res' => 'new GuideResource($guide->liquidation)',
-            'data' => $liquidation
+            'data' => $liquidation,
+            'res' => new GuideResource($guide),
         ], 200);
     }
 
@@ -69,6 +59,5 @@ class GuideController extends Controller
         $guide = Http::get($api_guide); */
         /* $guideAsArray = $guide->json();
         return $guideAsArray; */
-        return new GuideResource($guide);
     }
 }
