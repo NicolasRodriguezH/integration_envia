@@ -9,9 +9,9 @@ class Guide extends Model
 {
     protected $guarded = ['IdCLienteCredito', 'timestamps'];
 
-    public function liquidation() {
+    /* public function liquidation() {
         return $this->hasOne(Liquidation::class);
-    }
+    } */
 
     public function receiver() {
         return $this->hasOne(Receiver::class);

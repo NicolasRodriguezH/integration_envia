@@ -34,6 +34,12 @@ class CreateGuidesTable extends Migration
             $table->integer('IdSucursal')->nullable();
             $table->integer('IdCliente')->nullable();
             $table->string('Observaciones', 250)->nullable();
+            $table->longText('numeroPreenvio')->nullable();
+            $table->date('fechaVencimineto')->nullable();
+            $table->date('fechaCreacion')->nullable();
+            $table->decimal('valorFlete')->nullable();
+            $table->decimal('valorSobreFlete')->nullable();
+            $table->decimal('valorServicioContrapago')->nullable();
             /* $table->unsignedBigInteger('settlements_id');
             $table->foreign('settlement_id')
                     ->references('IdPreenvio')

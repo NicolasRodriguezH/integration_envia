@@ -36,7 +36,6 @@ class GuideController extends Controller
     {
         $guide = new Guide($request->all());
         $guide->save();
-
         $request->header('x-app-security_token');
 
         $liquidation = Http::post(env('API_LIQUIDATION'))->json();
@@ -55,9 +54,11 @@ class GuideController extends Controller
      */
     public function show(Guide $guide)
     {
-        /* $api_guide = env("API_GUIDE");
-        $guide = Http::get($api_guide); */
-        /* $guideAsArray = $guide->json();
-        return $guideAsArray; */
+        $api_querie = Http::get(env("API_QUERIE"));
+        
+        return response()->json([
+            'data' => $api_querie,
+            'res' => new GuideResource($guide),
+        ], 200);
     }
 }

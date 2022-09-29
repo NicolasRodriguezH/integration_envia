@@ -17,13 +17,15 @@ class GuideResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'IdPreenvio' => $this->liquidation->id,
-            'numeroPreenvio' => $this->liquidation->numeroPreenvio,
-            'fechaVencimineto' => $this->liquidation->fechaVencimineto,
-            'fechaCreacion' => $this->liquidation->fechaCreacion,
-            'valorFlete' => $this->liquidation->valorFlete,
-            'valorSobreFlete' => $this->liquidation->valorSobreFlete,
-            'valorServicioContrapago' => $this->liquidation->valorServicioContrapago
+            'Destinatario' => [
+            'IdPreenvio' => $this->id,
+            'numeroPreenvio' => $this->numeroPreenvio,
+            'fechaVencimineto' => $this->fechaVencimineto,
+            'fechaCreacion' => $this->fechaCreacion,
+            'valorFlete' => $this->valorFlete,
+            'valorSobreFlete' => $this->valorSobreFlete,
+            'valorServicioContrapago' => $this->valorServicioContrapago
+            ]
         ];
     }
 }
