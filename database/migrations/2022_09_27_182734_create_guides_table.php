@@ -14,38 +14,27 @@ class CreateGuidesTable extends Migration
     public function up()
     {
         Schema::create('guides', function (Blueprint $table) {
-            $table->id('IdClienteCredito');
-            $table->integer('CodigoConvenioRemitente')->nullable();
-            $table->integer('IdTipoEntrega')->nullable();
-            $table->boolean('AplicaContrapago')->nullable();
-            $table->integer('IdServicio')->nullable();
-            $table->decimal('Peso')->nullable();
-            $table->decimal('Largo')->nullable();
-            $table->decimal('Ancho')->nullable();
-            $table->decimal('Alto')->nullable();
-            $table->string('DiceContener', 50)->nullable();
-            $table->decimal('ValorDeclarado')->nullable();
-            $table->integer('IdTipoEnvio')->nullable();
-            $table->integer('IdFormaPago')->nullable();
-            $table->integer('NumeroPieza')->nullable();
-            $table->string('DescripcionTipoEntrega', 50)->nullable();
-            $table->string('NombreTipoEnvio', 50)->nullable();
-            $table->integer('CodigoConvenio')->nullable();
-            $table->integer('IdSucursal')->nullable();
-            $table->integer('IdCliente')->nullable();
-            $table->string('Observaciones', 250)->nullable();
-            $table->longText('numeroPreenvio')->nullable();
-            $table->date('fechaVencimineto')->nullable();
-            $table->date('fechaCreacion')->nullable();
-            $table->decimal('valorFlete')->nullable();
-            $table->decimal('valorSobreFlete')->nullable();
-            $table->decimal('valorServicioContrapago')->nullable();
-            /* $table->unsignedBigInteger('settlements_id');
-            $table->foreign('settlement_id')
-                    ->references('IdPreenvio')
-                    ->on('settlements')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade'); */
+            $table->id();
+            $table->integer('id_cliente_credito');
+            $table->integer('codigo_convenio_remitente')->nullable();
+            $table->integer('id_tipo_entrega')->nullable();
+            $table->boolean('aplica_contrapago')->nullable();
+            $table->integer('id_servicio')->nullable();
+            $table->decimal('peso')->nullable();
+            $table->decimal('largo')->nullable();
+            $table->decimal('ancho')->nullable();
+            $table->decimal('alto')->nullable();
+            $table->string('dice_contener', 50)->nullable();
+            $table->decimal('valor_declarado')->nullable();
+            $table->integer('id_tipo_envio')->nullable();
+            $table->integer('id_forma_pago')->nullable();
+            $table->integer('numero_pieza')->nullable();
+            $table->string('descripcion_tipo_entrega', 50)->nullable();
+            $table->string('nombre_tipo_envio', 50)->nullable();
+            $table->integer('codigo_convenio')->nullable();
+            $table->integer('id_sucursal')->nullable();
+            $table->integer('id_cliente')->nullable();
+            $table->string('observaciones', 250)->nullable();
             $table->timestamps();
         });
     }

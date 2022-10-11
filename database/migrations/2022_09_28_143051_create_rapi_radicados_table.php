@@ -15,8 +15,12 @@ class CreateRapiRadicadosTable extends Migration
     {
         Schema::create('rapi_radicados', function (Blueprint $table) {
             $table->id();
-            $table->integer('numeroDeFolios')->nullable();
-            $table->integer('codigoRapiRadicado')->nullable();
+            $table->integer('numero_de_folios')->nullable();
+            $table->integer('codigo_rapi_radicado')->nullable();
+            $table->unsignedBigInteger('guide_id');
+            $table->foreign('guide_id')
+                ->references('id')
+                ->on('guides');
             $table->timestamps();
         });
     }

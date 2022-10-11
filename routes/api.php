@@ -4,16 +4,15 @@ use App\Http\Controllers\Api\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\GuideController as GuideV1;
+use App\Http\Controllers\Api\V1\LiquidationController;
+use Illuminate\Routing\RouteGroup;
 
-use function Ramsey\Uuid\v1;
+Route::group([
 
-/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-}); */
-
+]);
 // V1
 Route::apiResource('v1/guide_envia', GuideV1::class)
-    ->only(['store', 'index', 'show'])
-    ->middleware('auth:sanctum');
-
-Route::post('login', [LoginController::class, 'login']);
+    ->only(['store', 'show']);
+    //->middleware('auth:sanctum')
+Route::apiResource('v1/liquidation', LiquidationController::class)
+    ->only('store');

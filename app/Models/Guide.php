@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guide extends Model
 {
-    protected $guarded = ['IdCLienteCredito', 'timestamps'];
+    protected $guarded = ['id', 'timestamps'];
 
     /* public function liquidation() {
         return $this->hasOne(Liquidation::class);

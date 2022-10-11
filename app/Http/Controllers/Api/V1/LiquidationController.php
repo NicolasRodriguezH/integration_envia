@@ -5,19 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Liquidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class LiquidationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -26,40 +17,32 @@ class LiquidationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try {
+            $liquidation = Http::withBasicAuth('EMPCAR01', 'EMPCAR1')->post(env('API_LIQUIDATION'), [
+                        "ciudad_origen" => $request->Destinatario['idDestinatario'],
+                        "ciudad_destino" => $request->Destinatario['idLocalidad'],
+                        "cod_formapago" => $request->IdFormaPago,
+                        "cod_servicio" => $request->IdServicio,
+                        "info_cubicacion" => [
+                            [
+                                "cantidad" => $request->NumeroPieza,
+                                "largo" => $request->Largo,
+                                "ancho" => $request->Ancho,
+                                "alto" => $request->Alto,
+                                "peso" => $request->Peso,
+                                "declarado" => $request->ValorDeclarado
+                            ]
+                        ]
+                    ])->json();
+                    
+            if ($liquidation) {
+                return response()->json([
+                    'data' => $liquidation
+                ], 200);
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Liquidation  $liquidation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Liquidation $liquidation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Liquidation  $liquidation
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Liquidation $liquidation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Liquidation  $liquidation
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Liquidation $liquidation)
-    {
-        //
     }
 }
