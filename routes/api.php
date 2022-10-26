@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\V1\QuerieController;
 
 // V1
 Route::apiResource('v1/guide_envia', GuideV1::class)
-    ->only(['store', 'downloadPDF']);
+    ->only('store');
     
 Route::apiResource('v1/liquidation', LiquidationController::class)
     ->only('store');

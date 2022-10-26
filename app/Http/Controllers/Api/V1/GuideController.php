@@ -3,13 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Guide;
-use App\Models\RapiRadicado;
-use App\Models\Receiver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
-use barryvdh\DomPDF\Facade as PDF;
 
 
 class GuideController extends Controller
@@ -23,6 +18,7 @@ class GuideController extends Controller
                     "ciudad_destino" => $request->Destinatario['idLocalidad'],
                     "cod_formapago" => $request->IdFormaPago,
                     "cod_servicio" => $request->IdServicio,
+                    'valorproducto' => $request->ValorProducto,
                     "info_cubicacion" => [                    
                         [
                             "cantidad" => $request->NumeroPieza,
@@ -43,85 +39,28 @@ class GuideController extends Controller
                         "ced_destinatario" => $request->Destinatario['numeroDocumento']
                     ],
                     "info_contenido" => [
-                        "dice_contener" => $request->DiceContener
+                        "dice_contener" => $request->DiceContener,
                     ]
                 ])->json();
                 
-                /* $guide = new Guide();
-                $guide->id_cliente_credito = $request->IdClienteCredito;
-                $guide->codigo_convenio_remitente = $request->CodigoConvenioRemitente;
-                $guide->id_tipo_entrega = $request->IdTipoEntrega;
-                $guide->aplica_contrapago = $request->AplicaContrapago;
-                $guide->id_servicio = $request->IdServicio;
-                $guide->peso = $request->Peso;
-                $guide->largo = $request->Largo;
-                $guide->ancho = $request->Ancho;
-                $guide->alto = $request->Alto;
-                $guide->dice_contener = $request->DiceContener;
-                $guide->valor_declarado = $request->ValorDeclarado;
-                $guide->id_tipo_envio = $request->IdTipoEnvio;
-                $guide->id_forma_pago = $request->IdFormaPago;
-                $guide->numero_pieza = $request->NumeroPieza;
-                $guide->descripcion_tipo_entrega = $request->DescripcionTipoEntrega;
-                $guide->nombre_tipo_envio = $request->NombreTipoEnvio;
-                $guide->codigo_convenio = $request->CodigoConvenio;
-                $guide->id_sucursal = $request->IdSucursal;
-                $guide->id_cliente = $request->IdCliente;
-                $guide->observaciones = $request->Observaciones;
-                            
-                $guide->save();
-                
-                $receiver = new Receiver();
-                $receiver->tipo_documento = $request->Destinatario['tipoDocumento'];
-                $receiver->numero_documento = $request->Destinatario['numeroDocumento'];
-                $receiver->nombre = $request->Destinatario['nombre'];
-                $receiver->primer_apellido = $request->Destinatario['primerApellido'];
-                $receiver->segundo_apellido = $request->Destinatario['segundoApellido'];
-                $receiver->telefono = $request->Destinatario['telefono'];
-                $receiver->direccion = $request->Destinatario['direccion'];
-                $receiver->id_destinatario = $request->Destinatario['idDestinatario'];
-                $receiver->id_remitente = $request->Destinatario['idRemitente'];
-                $receiver->id_localidad = $request->Destinatario['idLocalidad'];
-                $receiver->codigo_convenio = $request->Destinatario['CodigoConvenio'];
-                $receiver->convenio_destinatario = $request->Destinatario['ConvenioDestinatario'];
-                $receiver->correo = $request->Destinatario['correo'];
-                $receiver->guide_id = $guide->id;
-                
-                $receiver->save();
-                
-                $rapiradicado = new RapiRadicado();
-                $rapiradicado->numero_de_folios = $request->RapiRadicado['numerodeFolios'];
-                $rapiradicado->codigo_rapi_radicado = $request->RapiRadicado['CodigoRapiRadicado'];
-                $rapiradicado->guide_id = $guide->id;
-        
-                $rapiradicado->save(); */
-
-
-
-            if ($generate) {
+                if ($generate) {
                 return response()->json([
-                    'data' => $generate
-                ], 201);   
+                    //'respuesta' => $generate['respuesta'],
+                    //'kilos cobrados' => $generate['k_cobrados'],
+                    //'valor flete' => $generate['valor_flete'],
+                    //'valor costom' =>  $generate['valor_costom'],
+                    //'valor otros' => $generate['valor_otros'],
+                    //'dias_entrega' => $generate['dias_entrega'],}
+                    //'guia' => $generate['guia'],
+
+                    'pdf guia' => $generate['urlguia'],
+
+                    //'num ordens' => $generate['num_ordens'],
+                    //'cod postaldestino' => $generate['cod_postaldestino'],
+                    //'bt64' => $generate['bt64'],
+                ], 201);
             }
             
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-
-    }
-
-    public function downloadPdf()
-    {
-
-        try {
-
-            $pdf = Http::withBasicAuth('EMPCAR01', 'EMPCAR1')->post(env('API_GENERATE'))->json()
-                ->PDF::downloadPdf;
-    
-            return response()->json([
-                $pdf->download('guia_envia.pdf')
-            ], 200);
-
         } catch (\Throwable $th) {
             throw $th;
         }
