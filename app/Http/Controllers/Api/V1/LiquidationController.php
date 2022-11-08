@@ -23,6 +23,7 @@ class LiquidationController extends Controller
                         "ciudad_destino" => $request->Destinatario['idLocalidad'],
                         "cod_formapago" => $request->IdFormaPago,
                         "cod_servicio" => $request->IdServicio,
+                        'valorproducto' => $request->ValorProducto,
                         "info_cubicacion" => [
                             [
                                 "cantidad" => $request->NumeroPieza,
